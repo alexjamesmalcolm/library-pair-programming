@@ -1,7 +1,8 @@
 package org.wecancodeit.librarypairprogramming;
 
-import org.hamcrest.Matchers;
-import org.junit.Assert;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
+
 import org.junit.Test;
 
 public class BookTest {
@@ -11,6 +12,14 @@ public class BookTest {
 		String title = "Head First Java";
 		Book underTest = new Book(title);
 		String actual = underTest.getTitle();
-		Assert.assertThat(actual, Matchers.is(title));
+		assertThat(actual, is(title));
+	}
+	
+	@Test
+	public void shouldHaveTitleHeadFirstPython() {
+		String title = "Head First Python";
+		Book underTest = new Book(title);
+		String actual = underTest.getTitle();
+		assertThat(actual, is(title));
 	}
 }
