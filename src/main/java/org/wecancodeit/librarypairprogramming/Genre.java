@@ -1,8 +1,11 @@
 package org.wecancodeit.librarypairprogramming;
 
+import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Genre {
@@ -11,6 +14,9 @@ public class Genre {
 	@GeneratedValue
 	private long id;
 	private String genre;
+	
+	@OneToMany(mappedBy = "genre")
+	private Collection<Book> books;
 	
 	public Genre() {}
 
@@ -24,5 +30,14 @@ public class Genre {
 
 	public long getId() {
 		return id;
+	}
+
+	public Collection<Book> getBooks() {
+		return books;
+	}
+	
+	@Override
+	public String toString() {
+		return id + ":" + genre;
 	}
 }

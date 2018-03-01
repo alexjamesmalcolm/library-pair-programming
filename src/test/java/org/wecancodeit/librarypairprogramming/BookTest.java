@@ -10,7 +10,7 @@ public class BookTest {
 	@Test
 	public void shouldHaveTitleHeadFirstJava() {
 		String title = "Head First Java";
-		Book underTest = new Book(title);
+		Book underTest = new Book(title, null);
 		String actual = underTest.getTitle();
 		assertThat(actual, is(title));
 	}
@@ -18,7 +18,7 @@ public class BookTest {
 	@Test
 	public void shouldHaveTitleHeadFirstPython() {
 		String title = "Head First Python";
-		Book underTest = new Book(title);
+		Book underTest = new Book(title, null);
 		String actual = underTest.getTitle();
 		assertThat(actual, is(title));
 	}

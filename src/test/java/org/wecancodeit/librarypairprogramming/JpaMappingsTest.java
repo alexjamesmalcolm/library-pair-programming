@@ -1,11 +1,13 @@
 package org.wecancodeit.librarypairprogramming;
 
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 import javax.annotation.Resource;
 
+import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -22,6 +24,9 @@ public class JpaMappingsTest {
 	@Resource
 	private GenreRepository genreRepo;
 	
+	@Resource
+	private BookRepository bookRepo;
+	
 	@Test
 	public void shouldSuccessfullyInitializeJpa() {
 	}
@@ -35,5 +40,25 @@ public class JpaMappingsTest {
 		
 		genre = genreRepo.findOne(genreId);
 		assertThat(genreId, is(greaterThan(0L)));
+	}
+	
+	@Test
+	public void shouldSaveBookToGenreRelationship() {
+		Genre genre = new Genre("Fiction");
+		genreRepo.save(genre);
+		long genreId = genre.getId();
+		
+		Book first = new Book("first", genre);
+		bookRepo.save(first);
+		
+		Book second = new Book("second", genre);
+		bookRepo.save(second);
+		
+		entityManager.flush();
+		entityManager.clear();
+		
+		genre = genreRepo.findOne(genreId);
+		System.out.println(genre.getBooks());
+		assertThat(genre.getBooks(), containsInAnyOrder(first, second));
 	}
 }
