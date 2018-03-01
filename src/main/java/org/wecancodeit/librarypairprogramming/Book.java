@@ -19,7 +19,7 @@ public class Book {
 	@ManyToOne
 	private Genre genre;
 
-	@ManyToMany
+	@ManyToMany(mappedBy = "books")
 	private Collection<Author> authors;
 
 	@SuppressWarnings("unused")
@@ -57,5 +57,9 @@ public class Book {
 
 	public long getId() {
 		return id;
+	}
+
+	public Collection<Author> getAuthors() {
+		return authors;
 	}
 }

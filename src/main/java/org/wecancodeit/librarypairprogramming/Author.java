@@ -48,4 +48,21 @@ public class Author {
 		return books;
 	}
 
+	@Override
+	public String toString() {
+		return id + ":" + firstName + ", " + lastName;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null || getClass() != obj.getClass()) {
+			return false;
+		}
+
+		return id == ((Author) obj).id;
+	}
+
 }

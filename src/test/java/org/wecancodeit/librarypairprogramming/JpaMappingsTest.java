@@ -81,12 +81,31 @@ public class JpaMappingsTest {
 		Author author = new Author("Alex", "Malcolm", java, python);
 		author = authorRepo.save(author);
 		long authorId = author.getId();
-		
+
 		entityManager.flush();
 		entityManager.clear();
-		
+
 		author = authorRepo.findOne(authorId);
 		assertThat(author.getBooks(), containsInAnyOrder(java, python));
+	}
+
+	@Test
+	public void shouldEstablishBookToAuthorRelationship() {
+		Genre genre = genreRepo.save(new Genre("Fiction"));
+		Book book = bookRepo.save(new Book("book-title", genre));
+		long bookId = book.getId();
+
+		Author firstAuthor = new Author("Alex", "Malcolm", book);
+		firstAuthor = authorRepo.save(firstAuthor);
+
+		Author secondAuthor = new Author("Ryan", "Carson", book);
+		secondAuthor = authorRepo.save(secondAuthor);
+
+		entityManager.flush();
+		entityManager.clear();
+
+		book = bookRepo.findOne(bookId);
+		assertThat(book.getAuthors(), containsInAnyOrder(firstAuthor, secondAuthor));
 	}
 
 }
