@@ -18,7 +18,8 @@ public class Genre {
 	@OneToMany(mappedBy = "genre")
 	private Collection<Book> books;
 	
-	public Genre() {}
+	@SuppressWarnings("unused")
+	private Genre() {}
 
 	public Genre(String genre) {
 		this.genre = genre;
