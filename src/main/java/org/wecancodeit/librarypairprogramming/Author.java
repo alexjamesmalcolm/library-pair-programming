@@ -3,9 +3,11 @@ package org.wecancodeit.librarypairprogramming;
 public class Author {
 
 	private String firstName;
+	private String lastName;
 
-	public Author(String firstName, String lastname) {
+	public Author(String firstName, String lastName) {
 		this.firstName = firstName;
+		this.lastName = lastName;
 	}
 
 	public String getFirstName() {
@@ -13,7 +15,7 @@ public class Author {
 	}
 
 	public String getLastName() {
-		return "Malcolm";
+		return lastName;
 	}
 
 }
