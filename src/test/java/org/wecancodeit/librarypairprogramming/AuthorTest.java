@@ -14,4 +14,12 @@ public class AuthorTest {
 		String returnedName = underTest.getFirstName();
 		assertThat(returnedName, is(firstName));
 	}
+	
+	@Test
+	public void shouldReturnFirstNameBert() {
+		String firstName = "Bert";
+		Author underTest = new Author(firstName);
+		String returnedName = underTest.getFirstName();
+		assertThat(returnedName, is(firstName));
+	}
 }
