@@ -1,8 +1,13 @@
 package org.wecancodeit.librarypairprogramming;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Author {
@@ -10,13 +15,21 @@ public class Author {
 	@Id
 	@GeneratedValue
 	private long id;
-	
+
 	private String firstName;
 	private String lastName;
 
-	public Author(String firstName, String lastName) {
+	@ManyToMany
+	private Collection<Book> books;
+
+	@SuppressWarnings("unused")
+	private Author() {
+	}
+
+	public Author(String firstName, String lastName, Book... books) {
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.books = new HashSet<>(Arrays.asList(books));
 	}
 
 	public String getFirstName() {
@@ -29,6 +42,10 @@ public class Author {
 
 	public long getId() {
 		return id;
+	}
+
+	public Collection<Book> getBooks() {
+		return books;
 	}
 
 }
