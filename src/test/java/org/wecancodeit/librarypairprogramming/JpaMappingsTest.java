@@ -7,7 +7,6 @@ import static org.junit.Assert.assertThat;
 
 import javax.annotation.Resource;
 
-import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -26,6 +25,9 @@ public class JpaMappingsTest {
 	
 	@Resource
 	private BookRepository bookRepo;
+
+	@Resource
+	private AuthorRepository authorRepo;
 	
 	@Test
 	public void shouldSuccessfullyInitializeJpa() {
@@ -60,5 +62,14 @@ public class JpaMappingsTest {
 		genre = genreRepo.findOne(genreId);
 		System.out.println(genre.getBooks());
 		assertThat(genre.getBooks(), containsInAnyOrder(first, second));
+	}
+	
+	@Test
+	public void shouldSaveAndLoadAuthor() {
+		Author author = authorRepo.save(new Author("firstname", "lastname"));
+		long authorId = author.getId();
+		
+		author = authorRepo.findOne(authorId);
+		assertThat(author.getId(), is(authorId));
 	}
 }
