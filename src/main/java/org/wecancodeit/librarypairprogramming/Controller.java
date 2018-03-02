@@ -11,9 +11,10 @@ public class Controller {
 	@Resource
 	private GenreRepository genreRepo;
 
-	public void showGenres(Model model) {
+	public String showGenres(Model model) {
 		Collection<Genre> genres = (Collection<Genre>) genreRepo.findAll();
 		model.addAttribute("genres", genres);
+		return "all-genres-view";
 	}
 
 }

@@ -4,6 +4,8 @@ import static java.util.Arrays.asList;
 
 import java.util.Collection;
 
+import org.hamcrest.Matchers;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -42,6 +44,12 @@ public class ControllerTest {
 		underTest.showGenres(model);
 		
 		Mockito.verify(model).addAttribute("genres", allGenres);
+	}
+	
+	@Test
+	public void shouldHaveShowGenresReturnAllGenresView() {
+		String templateName = underTest.showGenres(model);
+		Assert.assertThat(templateName, Matchers.is("all-genres-view"));
 	}
 	
 //	@Test
