@@ -1,13 +1,13 @@
 package org.wecancodeit.librarypairprogramming;
 
 import static java.util.Arrays.asList;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Collection;
 
-import org.hamcrest.Matchers;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -59,7 +59,7 @@ public class ControllerTest {
 	@Test
 	public void shouldHaveShowGenresReturnAllGenresView() {
 		String templateName = underTest.showGenres(model);
-		Assert.assertThat(templateName, Matchers.is("all-genres-view"));
+		assertThat(templateName, is("all-genres-view"));
 	}
 	
 	@Test
@@ -70,6 +70,12 @@ public class ControllerTest {
 		underTest.showAuthors(model);
 		
 		verify(model).addAttribute("authors", allAuthors);
+	}
+	
+	@Test
+	public void shouldHaveShowAuthorsReturnAllAuthorsView() {
+		String templateName = underTest.showAuthors(model);
+		assertThat(templateName, is("all-authors-view"));
 	}
 	
 	// @Test

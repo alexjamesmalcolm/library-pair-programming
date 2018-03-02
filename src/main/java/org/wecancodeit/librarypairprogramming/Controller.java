@@ -20,9 +20,10 @@ public class Controller {
 		return "all-genres-view";
 	}
 
-	public void showAuthors(Model model) {
+	public String showAuthors(Model model) {
 		Collection<Author> authors = (Collection<Author>) authorRepo.findAll();
 		model.addAttribute("authors", authors);
+		return "all-authors-view";
 	}
 
 }
