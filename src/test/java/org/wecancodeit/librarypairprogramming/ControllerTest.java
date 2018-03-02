@@ -66,9 +66,9 @@ public class ControllerTest {
 	}
 
 	@Test
-	public void shouldHaveShowGenresReturnAllGenresView() {
+	public void shouldHaveShowGenresReturnGenres() {
 		String templateName = underTest.showGenres(model);
-		assertThat(templateName, is("all-genres-view"));
+		assertThat(templateName, is("genres"));
 	}
 
 	@Test
@@ -82,9 +82,9 @@ public class ControllerTest {
 	}
 
 	@Test
-	public void shouldHaveShowAuthorsReturnAllAuthorsView() {
+	public void shouldHaveShowAuthorsReturnAuthors() {
 		String templateName = underTest.showAuthors(model);
-		assertThat(templateName, is("all-authors-view"));
+		assertThat(templateName, is("authors"));
 	}
 
 	@Test
@@ -95,5 +95,11 @@ public class ControllerTest {
 		underTest.showBooks(model);
 		
 		verify(model).addAttribute("books", allBooks);
+	}
+	
+	@Test
+	public void shouldHaveShowBooksReturnBooks() {
+		String templateName = underTest.showBooks(model);
+		assertThat(templateName, is("books"));
 	}
 }

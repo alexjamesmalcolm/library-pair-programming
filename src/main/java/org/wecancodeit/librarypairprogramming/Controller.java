@@ -20,18 +20,19 @@ public class Controller {
 	public String showGenres(Model model) {
 		Collection<Genre> genres = (Collection<Genre>) genreRepo.findAll();
 		model.addAttribute("genres", genres);
-		return "all-genres-view";
+		return "genres";
 	}
 
 	public String showAuthors(Model model) {
 		Collection<Author> authors = (Collection<Author>) authorRepo.findAll();
 		model.addAttribute("authors", authors);
-		return "all-authors-view";
+		return "authors";
 	}
 
-	public void showBooks(Model model) {
+	public String showBooks(Model model) {
 		Collection<Book> books = (Collection<Book>) bookRepo.findAll();
 		model.addAttribute("books", books);
+		return "books";
 	}
 
 }
