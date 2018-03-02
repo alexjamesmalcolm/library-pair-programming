@@ -1,6 +1,8 @@
 package org.wecancodeit.librarypairprogramming;
 
 import static java.util.Arrays.asList;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.Collection;
 
@@ -10,7 +12,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.ui.Model;
 
@@ -24,9 +25,18 @@ public class ControllerTest {
 	
 	@Mock
 	private Genre anotherGenre;
+	
+	@Mock
+	private Author author;
+	
+	@Mock
+	private Author anotherAuthor;
 
 	@Mock
 	private GenreRepository genreRepo;
+	
+	@Mock
+	private AuthorRepository authorRepo;
 
 	@Mock
 	private Model model;
@@ -39,11 +49,11 @@ public class ControllerTest {
 	@Test
 	public void shouldAddGenresToModel() {
 		Collection<Genre> allGenres = asList(genre, anotherGenre);
-		Mockito.when(genreRepo.findAll()).thenReturn(allGenres);
+		when(genreRepo.findAll()).thenReturn(allGenres);
 		
 		underTest.showGenres(model);
 		
-		Mockito.verify(model).addAttribute("genres", allGenres);
+		verify(model).addAttribute("genres", allGenres);
 	}
 	
 	@Test
@@ -52,8 +62,15 @@ public class ControllerTest {
 		Assert.assertThat(templateName, Matchers.is("all-genres-view"));
 	}
 	
-//	@Test
-//	public void shouldAddAuthorsToModel() {}
+	@Test
+	public void shouldAddAuthorsToModel() {
+		Collection<Author> allAuthors = asList(author, anotherAuthor);
+		when(authorRepo.findAll()).thenReturn(allAuthors);
+		
+		underTest.showAuthors(model);
+		
+		verify(model).addAttribute("authors", allAuthors);
+	}
 	
 	// @Test
 	// public void shouldAddBooksToModel() {}
