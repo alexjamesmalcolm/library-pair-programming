@@ -13,6 +13,9 @@ public class Controller {
 	
 	@Resource
 	private AuthorRepository authorRepo;
+	
+	@Resource
+	private BookRepository bookRepo;
 
 	public String showGenres(Model model) {
 		Collection<Genre> genres = (Collection<Genre>) genreRepo.findAll();
@@ -24,6 +27,11 @@ public class Controller {
 		Collection<Author> authors = (Collection<Author>) authorRepo.findAll();
 		model.addAttribute("authors", authors);
 		return "all-authors-view";
+	}
+
+	public void showBooks(Model model) {
+		Collection<Book> books = (Collection<Book>) bookRepo.findAll();
+		model.addAttribute("books", books);
 	}
 
 }
